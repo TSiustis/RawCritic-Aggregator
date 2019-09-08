@@ -1,0 +1,166 @@
+﻿@page
+@model RawCritic2.Pages.Games.XboxOneModel
+
+@{
+    ViewData["name"] = "Index";
+}
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+}
+
+
+
+<div class="container">
+
+    <div class="col-md-9 right">
+        <table class="table">
+            <thead>
+                <tr>
+
+                    @*<th>
+                        @Html.DisplayNameFor(model => model.Game[0].Title)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Game[0].ReleaseDate)
+                    </th>
+                    <th>
+                        Rating
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Game[0].platforms)
+                    </th>*@
+
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Game)
+                {
+                    <tr>
+
+                        <td>
+                            @if (item.AggregatedRating != 0)
+                            {
+                                @Html.DisplayFor(modelItem => item.AggregatedRating)
+                            }
+                            else
+                            {
+                                @:?
+                            }
+                            <a asp-page="./Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.Title)</a>
+                        </td>
+                        <td>
+
+                            @Html.DisplayFor(modelItem => item.ReleaseDate)
+                        </td>
+                        <td>
+                            <img src="@item.Cover" height=" 100" />
+                        </td>
+
+                        <th>
+                            @{ string platforms = Model.GetPlatforms(item.platforms);}
+                            @Html.Raw(System.Web.HttpUtility.HtmlEncode(platforms))
+                        </th>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <td>
+                                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+
+                                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        }
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="col-md-3">
+        <div class="sidebar-nav pull-right">
+            <div class="well">
+                <h2>Available now</h2>
+                @foreach (var item in Model.GetGames(5))
+                {
+                    <ul class="nav">
+                        <a asp-page="./Details" asp-route-id="@item.GameID">
+                            <li>
+                                @if (item.AggregatedRating != 0 || item.AggregatedRating != null)
+                                {
+                                    @Html.DisplayFor(modelItem => item.AggregatedRating)
+                                }
+                                else
+                                {
+                                    @:?
+                                } @Html.DisplayFor(modelItem => item.Title)
+                                <img src="@item.Cover" height=" 50" style="border-radius: 60%" />
+                            </li>
+                        </a>
+
+
+                        <li>
+                            @Html.DisplayFor(modelItem => item.Platform)
+                        </li>
+                        <li>
+                            @Html.DisplayFor(modelItem => item.Developer)
+                        </li>
+                    </ul>
+                }
+            </div>
+
+            @*<h2>Upcoming Releases</h2>
+                @foreach (var item in Model.Game)
+                {
+                    <ul class="nav">
+                        <li>
+                            <nobr>
+                                @Html.DisplayFor(modelItem => item.AggregatedRating)
+                                <a asp-page="./Details" asp-route-id="@item.Id">
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </a>
+                            </nobr>
+                            <img src="@item.Cover" height=" 50" />
+                        </li>
+
+
+                        <li>
+                            @Html.DisplayFor(modelItem => item.Platform)
+                        </li>
+                        <li>
+                            @Html.DisplayFor(modelItem => item.Developer)
+                        </li>
+                    </ul>
+                }
+
+                <h2>Reviewed today</h2>
+                @foreach (var item in Model.Game)
+                {
+                    <ul class="nav">
+                        <li>
+                            <nobr>
+                                @Html.DisplayFor(modelItem => item.AggregatedRating)
+                                <a asp-page="./Details" asp-route-id="@item.Id">
+                                    @Html.DisplayFor(modelItem => item.Title)
+                                </a>
+                                <img src="@item.Cover" height=" 50" />
+                            </nobr>
+                        </li>
+
+
+                        <li>
+                            @Html.DisplayFor(modelItem => item.Platform)
+                        </li>
+                        <li>
+                            @Html.DisplayFor(modelItem => item.Developer)
+                        </li>
+                    </ul>
+                }*@
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29009.5
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RawCritic2", "RawCritic2\RawCritic2.csproj", "{EEFB8857-2715-4078-8EFE-F2F08B855630}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EEFB8857-2715-4078-8EFE-F2F08B855630}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EEFB8857-2715-4078-8EFE-F2F08B855630}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EEFB8857-2715-4078-8EFE-F2F08B855630}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EEFB8857-2715-4078-8EFE-F2F08B855630}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {89486594-C67D-4345-83E2-93171D7E50F6}
+	EndGlobalSection
+EndGlobal
