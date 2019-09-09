@@ -56,7 +56,7 @@ namespace RawCritic2.Pages.Games
             var game = from m in _context.Game
                        select m;
 
-            game = game.Where(s => s.AggregatedRating >= rating).OrderByDescending(s => s.AggregatedRating); 
+            game = game.Where(s => s.AggregatedRating >= rating).OrderByDescending(s => s.AggregatedRating).Take(5); 
             Games = game.ToList();
             return Games;
         }

@@ -42,12 +42,13 @@
             <tbody>
                 @foreach (var item in Model.Data)
                 {
+                    var rating = item.AggregatedRating.ToString("N0");
                     <tr>
 
                         <td>
                             @if (item.AggregatedRating != 0)
                             {
-                                @Html.DisplayFor(modelItem => item.AggregatedRating)
+                                @rating
                             }
                             else
                             {
@@ -86,19 +87,19 @@
             <div class="well">
                 <h2>Available now</h2>
                 @foreach (var item in Model.GetGames(5))
-                {
+                {var rating = item.AggregatedRating.ToString("N0");
                     <ul class="nav">
                         <a asp-page="./Details" asp-route-id="@item.GameID">
                             <li>
                                 @if (item.AggregatedRating != 0 || item.AggregatedRating != null)
                                 {
-                                    @Html.DisplayFor(modelItem => item.AggregatedRating)
+                                    @rating
                                 }
                                 else
                                 {
                                     @:?
                                 } @Html.DisplayFor(modelItem => item.Title)
-                                <img src="@item.Cover" height=" 50" style="border-radius: 60%"/>
+                                <img src="@item.Cover" height=" 50" style="border-radius: 60%" />
                             </li>
                         </a>
 

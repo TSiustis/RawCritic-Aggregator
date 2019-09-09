@@ -62,18 +62,18 @@
     <div class="col-md-3">
         <h2>Available now</h2>
        @foreach (var item in Model.GetGames(3))
-        {
+        { var rating = item.AggregatedRating.ToString("N0");
             <ul>
                 <li>
                     <nobr>
                         @if (item.AggregatedRating != 0)
                         {
-                            @Html.DisplayFor(modelItem => item.AggregatedRating)
+                            @rating
                         }
                         else
                         {
                             @:?
-                        } <a asp-page=".Games/Details" asp-route-id="@item.Id">      @Html.DisplayFor(modelItem => item.Title)</a> <img src="@item.Cover" height=" 50" style="border-radius: 60%" />
+                        } <a asp-page="Games/Details" asp-route-id="@item.GameID">      @Html.DisplayFor(modelItem => item.Title)</a> <img src="@item.Cover" height=" 50" style="border-radius: 60%" />
                     </nobr>
                 </li>
 
@@ -91,12 +91,13 @@
         <h2>Upcoming Releases</h2>
         @foreach (var item in Model.GetUpcoming(3))
         {
+              var rating = item.AggregatedRating.ToString("N0");
             <ul>
                 <li>
                     <nobr>
                         @if (item.AggregatedRating != 0)
                         {
-                            @Html.DisplayFor(modelItem => item.AggregatedRating)
+                            @rating
                         }
                         else
                         {
@@ -117,18 +118,20 @@
     <div class="col-md-3">
         <h2>Reviewed today</h2>
         @foreach (var item in Model.GetReviewedToday(5))
-        {
+        { var rating = item.AggregatedRating.ToString("N0");
             <ul>
                 <li>
 
-                    <nobr> @if (item.AggregatedRating != 0)
-                    {
-                        @Html.DisplayFor(modelItem => item.AggregatedRating.ToString("N0") )
-                    }
-                    else
-                    {
-                        @:?
-                    }<a asp-page=".Games/Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.Title)  </a><img src="@item.Cover" height=" 50" style="border-radius: 60%" /></nobr>
+                    <nobr>
+                        @if (item.AggregatedRating != 0)
+                        {
+                        @rating
+                        }
+                        else
+                        {
+                            @:?
+                        }<a asp-page=".Games/Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.Title)  </a><img src="@item.Cover" height=" 50" style="border-radius: 60%" />
+                    </nobr>
                 </li>
                
                 <li>

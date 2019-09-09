@@ -40,7 +40,9 @@
                 }
                 <h2 class="title"> @Html.DisplayFor(model => model.Game.Title)</h2>
                 <div class="item @ratingClass">
-                    <h2>@Html.DisplayFor(model => model.Game.AggregatedRating)</h2>
+
+                    @{ var rating = Model.Game.AggregatedRating.ToString("N0"); }
+                    <h2>@rating</h2>
                     <svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
                         <g>
                             <circle id="circle" class="circle_animation" r="69.85699" cy="81" cx="81" stroke-width="8" stroke="@ratingColor" fill="none" />
@@ -58,12 +60,12 @@
                 <table>
         <tr><td>Available on:</td></tr>
         <tr>
-                @*@foreach (var item2 in Model.GetPlatforms(Model.Game.platforms))
+            @*@foreach (var item2 in Model.GetPlatforms(Model.Game.platforms))
         {*@
-                @{ string platforms = Model.GetPlatforms(Model.Game.platforms);}
+            @{ string platforms = Model.GetPlatforms(Model.Game.platforms);}
             <td style="white-space: pre-line"> @Html.Raw(System.Web.HttpUtility.HtmlEncode(platforms))</td>
-               @*}*@
-                </tr>
+            @*}*@
+        </tr>
             <tr>
                 @Html.DisplayFor(model => model.Game.ReleaseDate)
             </tr>
@@ -85,9 +87,10 @@
                     <ul class="nav">
                         @foreach (var item in Model.GetGamesHighScore(70))
                         {
+                            var ratingSide = item.AggregatedRating.ToString("N0"); 
 
                             <li>
-                                <nobr>@item.AggregatedRating  <a asp-page="./Details" asp-route-id="@item.Id"> @item.Title</a> <img src="@item.Cover" height="50px" style="border-radius: 60%" /></nobr>
+                                <nobr>@ratingSide <a asp-page="./Details" asp-route-id="@item.GameID"> @item.Title</a> <img src="@item.Cover" height="50px" style="border-radius: 60%" /></nobr>
                             </li>
 
 
