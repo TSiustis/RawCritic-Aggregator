@@ -23,37 +23,38 @@
                 <tr>
 
                     @*<th>
-                        @Html.DisplayNameFor(model => model.Game[0].Title)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Game[0].ReleaseDate)
-                    </th>
-                    <th>
-                        Rating
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Game[0].platforms)
-                    </th>*@
+                            @Html.DisplayNameFor(model => model.Game[0].Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Game[0].ReleaseDate)
+                        </th>
+                        <th>
+                            Rating
+                        </th>
+                        <th>
+
+                        @*</th>*@
 
 
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in Model.Game)
+                @foreach (var item in Model.Data)
                 {
+                    var rating = item.AggregatedRating.ToString("N0");
                     <tr>
 
                         <td>
                             @if (item.AggregatedRating != 0)
                             {
-                                @Html.DisplayFor(modelItem => item.AggregatedRating)
+                                @rating
                             }
                             else
                             {
                                 @:?
                             }
-                            <a asp-page="./Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.Title)</a>
+                            <a asp-page="./Details" asp-route-id="@item.GameID">  @Html.DisplayFor(modelItem => item.Title)</a>
                         </td>
                         <td>
 
@@ -64,7 +65,8 @@
                         </td>
 
                         <th>
-                            @Html.DisplayFor(model => model.Game[0].platforms)
+                            @{ string platforms = Model.GetPlatforms(item.platforms);}
+                            @Html.Raw(System.Web.HttpUtility.HtmlEncode(platforms))
                         </th>
                         @if (User.Identity.IsAuthenticated)
                         {
@@ -86,12 +88,13 @@
                 <h2>Available now</h2>
                 @foreach (var item in Model.GetGames(5))
                 {
+                    var rating = item.AggregatedRating.ToString("N0");
                     <ul class="nav">
                         <a asp-page="./Details" asp-route-id="@item.GameID">
                             <li>
                                 @if (item.AggregatedRating != 0 || item.AggregatedRating != null)
                                 {
-                                    @Html.DisplayFor(modelItem => item.AggregatedRating)
+                                    @rating
                                 }
                                 else
                                 {
@@ -103,8 +106,7 @@
 
 
                         <li>
-                            @{ string platforms = Model.GetPlatforms(item.platforms);}
-                            @Html.Raw(System.Web.HttpUtility.HtmlEncode(platforms))
+                            @Html.DisplayFor(modelItem => item.Platform)
                         </li>
                         <li>
                             @Html.DisplayFor(modelItem => item.Developer)
@@ -163,4 +165,15 @@
 
         </div>
     </div>
+
+</div>
+<div>
+    <ul class="pagination">
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-page="./Index" asp-route-currentpage="@i" class="page-link">@i</a>
+            </li>
+        }
+    </ul>
 </div>

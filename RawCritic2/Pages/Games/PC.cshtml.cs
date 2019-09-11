@@ -13,22 +13,24 @@ namespace RawCritic2.Pages.Games
 {
     public class PCModel : GamePageModelService
     {
+        [BindProperty(SupportsGet = true)]
+        public int CurrentPage { get; set; } = 1;
+        public int Count { get; set; }
+        public int PageSize { get; set; } = 10;
         private readonly RawCritic2.Data.ApplicationDbContext _context;
-        [BindProperty(SupportsGet =true)]
-        public string SearchString { get; set; }
-        public PCModel(RawCritic2.Data.ApplicationDbContext context) :base(context)
+        public IQueryable<Game> Games { get; set; }
+        public PCModel(RawCritic2.Data.ApplicationDbContext context) : base(context)
         {
             _context = context;
         }
-       
-        public IQueryable<Game> Games { get; set; }
-
-
+        public int TotalPages => (int)Math.Ceiling(decimal.Divide(_context.Game.Count(), PageSize));
         public IList<Game> Game { get; set; }
 
+        public IList<Models.Game> Data { get; set; }
         public async Task OnGetAsync()
         {
-            Game = await GetCategoryAsync("PC", SearchString);
+            Data = await GetPaginatedResult(CurrentPage, PageSize);
+            Game = await GetCategoryAsync("Microsoft Windows", SearchString);
         }
         public IQueryable<Game> GetGames(int i)
         {
@@ -46,5 +48,17 @@ namespace RawCritic2.Pages.Games
             }
             return result;
         }
+        public async Task<IList<Game>> GetPaginatedResult(int currentPage, int pageSize = 10)
+        {
+            var data = _context.Game.Select(s => s).Where(s => s.platforms.Contains("Microsoft Windows")); ;
+            return await data.OrderByDescending(d => d.AggregatedRating).Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync();
+        }
+
+        public async Task<int> GetCount()
+        {
+
+            return _context.Game.Count();
+        }
+
     }
 }

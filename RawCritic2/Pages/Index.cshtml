@@ -102,7 +102,7 @@
                         else
                         {
                             @:?
-                        }<a asp-page=".Games/Details" asp-route-id="@item.Id">      @Html.DisplayFor(modelItem => item.Title)</a> <img src="@item.Cover" height=" 50" style="border-radius: 60%" />
+                        }<a asp-page="Games/Details" asp-route-id="@item.GameID">      @Html.DisplayFor(modelItem => item.Title)</a> <img src="@item.Cover" height=" 50" style="border-radius: 60%" />
                     </nobr>
                 </li>
                
@@ -130,7 +130,7 @@
                         else
                         {
                             @:?
-                        }<a asp-page=".Games/Details" asp-route-id="@item.Id">  @Html.DisplayFor(modelItem => item.Title)  </a><img src="@item.Cover" height=" 50" style="border-radius: 60%" />
+                        }<a asp-page="Games/Details" asp-route-id="@item.GameID">  @Html.DisplayFor(modelItem => item.Title)  </a><img src="@item.Cover" height=" 50" style="border-radius: 60%" />
                     </nobr>
                 </li>
                

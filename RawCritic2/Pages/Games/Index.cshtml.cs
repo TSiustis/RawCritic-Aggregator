@@ -51,7 +51,7 @@ namespace RawCritic2.Pages.Games
         public async Task<IList<Game>> GetPaginatedResult(int currentPage, int pageSize = 10)
         {
             var data =  _context.Game.Select(s => s);
-            return  await data.OrderBy(d => d.Id).Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync();
+            return  await data.OrderByDescending(d => d.AggregatedRating).Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync();
         }
 
         public async Task<int> GetCount()

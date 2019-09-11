@@ -275,7 +275,7 @@ WriteAttributeValue("", 1810, ratingColor, 1810, 12, false);
             WriteLiteral(" ");
             EndContext();
             BeginContext(3590, 68, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "62c7f2c6a5d243de95c80eadd902d3d6", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "cbcd7b29fc8c4d87afc3e8ad9d4a26b2", async() => {
                 BeginContext(3642, 1, true);
                 WriteLiteral(" ");
                 EndContext();
@@ -370,7 +370,7 @@ WriteAttributeValue("", 3669, item.Cover, 3669, 11, false);
             WriteLiteral("    <div>\r\n        ");
             EndContext();
             BeginContext(5454, 63, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "2df7f8bba8c0483181cad7212a853a5c", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "37a030c153f7452eb5cc44007f937f4a", async() => {
                 BeginContext(5509, 4, true);
                 WriteLiteral("Edit");
                 EndContext();
@@ -405,7 +405,7 @@ WriteAttributeValue("", 3669, item.Cover, 3669, 11, false);
             WriteLiteral(" |\r\n        ");
             EndContext();
             BeginContext(5529, 38, false);
-            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "6faffe96cc0349feac0fe5d184bd71e5", async() => {
+            __tagHelperExecutionContext = __tagHelperScopeManager.Begin("a", global::Microsoft.AspNetCore.Razor.TagHelpers.TagMode.StartTagAndEndTag, "0ee0bd6b81a3465da5eeea65c5281fbb", async() => {
                 BeginContext(5551, 12, true);
                 WriteLiteral("Back to List");
                 EndContext();
