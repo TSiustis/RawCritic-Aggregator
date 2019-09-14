@@ -39,16 +39,49 @@
                     <th></th>
                 </tr>
             </thead>
+
             <tbody>
+              
                 @foreach (var item in Model.Data)
                 {
+                      string ratingClass = "";
+                        string ratingClassSmall = "";
+                        string ratingColor = "";
+
+                        if (item.AggregatedRating >= 80)
+                        {
+                            ratingClass = "high";
+                            ratingClassSmall = "high-small";
+                            ratingColor = "#03fc56";
+                        }
+                        else if (item.AggregatedRating < 80 && item.AggregatedRating >= 50)
+                        {
+                            ratingClass = "med";
+                            ratingClassSmall = "med-small";
+                            ratingColor = "#dbfc03";
+                        }
+                        else if (item.AggregatedRating < 50)
+                        {
+                            ratingClass = "low";
+                            ratingClassSmall = "low-small";
+                            ratingColor = "#d9042b";
+                        }
                     var rating = item.AggregatedRating.ToString("N0");
+                    var ratingSide = item.AggregatedRating.ToString("N0");
                     <tr>
 
                         <td>
                             @if (item.AggregatedRating != 0)
                             {
-                                @rating
+                                <div class="item @ratingClassSmall">
+
+                                    <h3>@ratingSide</h3>
+                                    <svg width="55" height="35" xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <circle id="circle" class="circle_animation" r="20" cy="20" cx="20" stroke-width="2" stroke="@ratingColor" fill="none" />
+                                        </g>
+                                    </svg>
+                                </div>
                             }
                             else
                             {

@@ -20,21 +20,25 @@
                  ">
                 @{
                     string ratingClass = "";
+                    string ratingClassSmall = "";
                     string ratingColor = "";
 
                     if (@Model.Game.AggregatedRating >= 80)
                     {
                         ratingClass = "high";
+                        ratingClassSmall = "high-small";
                         ratingColor = "#03fc56";
                     }
                     else if (@Model.Game.AggregatedRating < 80 && @Model.Game.AggregatedRating >= 50)
                     {
                         ratingClass = "med";
+                        ratingClassSmall = "med-small";
                         ratingColor = "#dbfc03";
                     }
                     else if (@Model.Game.AggregatedRating < 50)
                     {
                         ratingClass = "low";
+                        ratingClassSmall = "low-small";
                         ratingColor = "#d9042b";
                     }
                 }
@@ -90,7 +94,17 @@
                             var ratingSide = item.AggregatedRating.ToString("N0"); 
 
                             <li>
-                                <nobr>@ratingSide <a asp-page="./Details" asp-route-id="@item.GameID"> @item.Title</a> <img src="@item.Cover" height="50px" style="border-radius: 60%" /></nobr>
+                                <nobr>
+                                    <a asp-page="./Details" asp-route-id="@item.GameID"><div class="item @ratingClassSmall">
+
+    <h3>@ratingSide</h3>
+    <svg width="55" height="35" xmlns="http://www.w3.org/2000/svg">
+        <g>
+            <circle id="circle" class="circle_animation" r="20" cy="20" cx="20" stroke-width="2" stroke="@ratingColor" fill="none" />
+        </g>
+    </svg>
+</div> @item.Title</a> <img src="@item.Cover" height="50px" style="border-radius: 60%" />
+                                </nobr>
                             </li>
 
 

@@ -40,44 +40,78 @@
                 </tr>
             </thead>
             <tbody>
+
                 @foreach (var item in Model.Data)
                 {
-                    var rating = item.AggregatedRating.ToString("N0");
-                    <tr>
 
-                        <td>
-                            @if (item.AggregatedRating != 0)
-                            {
-                                @rating
-                            }
-                            else
-                            {
-                                @:?
-                            }
-                            <a asp-page="./Details" asp-route-id="@item.GameID">  @Html.DisplayFor(modelItem => item.Title)</a>
-                        </td>
-                        <td>
+                        string ratingClass = "";
+                        string ratingClassSmall = "";
+                        string ratingColor = "";
 
-                            @Html.DisplayFor(modelItem => item.ReleaseDate)
-                        </td>
-                        <td>
-                            <img src="@item.Cover" height=" 100" />
-                        </td>
-
-                        <th>
-                            @{ string platforms = Model.GetPlatforms(item.platforms);}
-                            @Html.Raw(System.Web.HttpUtility.HtmlEncode(platforms))
-                        </th>
-                        @if (User.Identity.IsAuthenticated)
+                        if (item.AggregatedRating >= 80)
                         {
-                            <td>
-                                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
-
-                                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
-                            </td>
+                            ratingClass = "high";
+                            ratingClassSmall = "high-small";
+                            ratingColor = "#03fc56";
                         }
-                    </tr>
-                }
+                        else if (item.AggregatedRating < 80 && item.AggregatedRating >= 50)
+                        {
+                            ratingClass = "med";
+                            ratingClassSmall = "med-small";
+                            ratingColor = "#dbfc03";
+                        }
+                        else if (item.AggregatedRating < 50)
+                        {
+                            ratingClass = "low";
+                            ratingClassSmall = "low-small";
+                            ratingColor = "#d9042b";
+                        }
+                
+                var rating = item.AggregatedRating.ToString("N0");
+                var ratingSide = item.AggregatedRating.ToString("N0");
+                <tr>
+
+                    <td>
+                        @if (item.AggregatedRating != 0)
+                        {
+                            <div class="item @ratingClassSmall">
+
+                                <h3>@ratingSide</h3>
+                                <svg width="55" height="35" xmlns="http://www.w3.org/2000/svg">
+                                    <g>
+                                        <circle id="circle" class="circle_animation" r="20" cy="20" cx="20" stroke-width="2" stroke="@ratingColor" fill="none" />
+                                    </g>
+                                </svg>
+                            </div>
+                        }
+                        else
+                        {
+                            @:?
+                        }
+                        <a asp-page="./Details" asp-route-id="@item.GameID">  @Html.DisplayFor(modelItem => item.Title)</a>
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.ReleaseDate)
+                    </td>
+                    <td>
+                        <img src="@item.Cover" height=" 100" />
+                    </td>
+
+                    <th>
+                        @{ string platforms = Model.GetPlatforms(item.platforms);}
+                        @Html.Raw(System.Web.HttpUtility.HtmlEncode(platforms))
+                    </th>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <td>
+                            <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+
+                            <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                        </td>
+                    }
+                </tr>
+            }
             </tbody>
         </table>
     </div>
@@ -87,13 +121,45 @@
             <div class="well">
                 <h2>Available now</h2>
                 @foreach (var item in Model.GetGames(5))
-                {var rating = item.AggregatedRating.ToString("N0");
+
+                {
+                    var ratingSide = item.AggregatedRating.ToString("N0"); 
+                       string ratingClass = "";
+                        string ratingClassSmall = "";
+                        string ratingColor = "";
+
+                        if (item.AggregatedRating >= 80)
+                        {
+                            ratingClass = "high";
+                            ratingClassSmall = "high-small";
+                            ratingColor = "#03fc56";
+                        }
+                        else if (item.AggregatedRating < 80 && item.AggregatedRating >= 50)
+                        {
+                            ratingClass = "med";
+                            ratingClassSmall = "med-small";
+                            ratingColor = "#dbfc03";
+                        }
+                        else if (item.AggregatedRating < 50)
+                        {
+                            ratingClass = "low";
+                            ratingClassSmall = "low-small";
+                            ratingColor = "#d9042b";
+                        }
+                    var rating = item.AggregatedRating.ToString("N0");
                     <ul class="nav">
                         <a asp-page="./Details" asp-route-id="@item.GameID">
                             <li>
                                 @if (item.AggregatedRating != 0 || item.AggregatedRating != null)
                                 {
-                                    @rating
+                                    <div class="item @ratingClassSmall">
+                                        <h3>@ratingSide</h3>
+                                        <svg width="55" height="35" xmlns="http://www.w3.org/2000/svg">
+                                            <g>
+                                                <circle id="circle" class="circle_animation" r="20" cy="20" cx="20" stroke-width="2" stroke="@ratingColor" fill="none" />
+                                            </g>
+                                        </svg>
+                                    </div>
                                 }
                                 else
                                 {

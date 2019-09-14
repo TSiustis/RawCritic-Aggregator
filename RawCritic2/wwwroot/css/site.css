@@ -45,7 +45,11 @@ li{
     line-height: 125px;
     width: 100%;
 }
-
+    .item h3 {
+        text-align: center;
+        position: absolute;
+        width: 100%;
+    }
 svg {
     transform: rotate(-90deg);
 }
@@ -62,13 +66,29 @@ svg {
     animation: low 1s ease-out forwards;
 }
 .med .circle_animation {
-    -webkit-animation: med 1s ease-out forwards;
-    animation: med 1s ease-out forwards;
+    -webkit-animation: low 1s ease-out forwards;
+    animation: low 1s ease-out forwards;
+}
+.high .circle_animation {
+    -webkit-animation: low 1s ease-out forwards;
+    animation: low 1s ease-out forwards;
+}
+.low-small .circle_animation {
+    -webkit-animation: low 1s ease-out backwards;
+    animation: low 1s ease-out backwards;
+}
+.med .circle_animation {
+    -webkit-animation: med 1s ease-out backwards;
+    animation: med 1s ease-out backwards;
+}
+.med-small .circle_animation {
+    -webkit-animation: med 1s ease-out backwards;
+    animation: med 1s ease-out backwards;
 }
 
-.high .circle_animation {
-    -webkit-animation: high 1s ease-out forwards;
-    animation: high 1s ease-out forwards;
+.high-small .circle_animation {
+    -webkit-animation: high 1s ease-out backwards;
+    animation: high 1s ease-out backwards;
 }
 
 @-webkit-keyframes low {
@@ -96,13 +116,48 @@ svg {
 }
 @-webkit-keyframes high{
     to {
-        stroke-dashoffset: 60;
+        stroke-dashoffset: 10;
     }
 }
 
 @keyframes high {
     to {
-        stroke-dashoffset: 50;
+        stroke-dashoffset: 10;
+    }
+}
+@-webkit-keyframes low-small {
+    to {
+        stroke-dashoffset: 250;
+    }
+}
+
+@keyframes low-small {
+    to {
+        stroke-dashoffset: 250;
+    }
+}
+
+@-webkit-keyframes med-small {
+    to {
+        stroke-dashoffset: 160;
+    }
+}
+
+@keyframes med-small {
+    to {
+        stroke-dashoffset: 160;
+    }
+}
+
+@-webkit-keyframes high-small {
+    to {
+        stroke-dashoffset: 700;
+    }
+}
+
+@keyframes high-small {
+    to {
+        stroke-dashoffset: 700;
     }
 }
 /* Hide/rearrange for smaller screens */

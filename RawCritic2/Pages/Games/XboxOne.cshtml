@@ -41,13 +41,44 @@
             </thead>
             <tbody>
                 @foreach (var item in Model.Game)
-                {
+                {var ratingSide = item.AggregatedRating.ToString("N0"); 
+                      
+                       string ratingClass = "";
+                        string ratingClassSmall = "";
+                        string ratingColor = "";
+
+                        if (item.AggregatedRating >= 80)
+                        {
+                            ratingClass = "high";
+                            ratingClassSmall = "high-small";
+                            ratingColor = "#03fc56";
+                        }
+                        else if (item.AggregatedRating < 80 && item.AggregatedRating >= 50)
+                        {
+                            ratingClass = "med";
+                            ratingClassSmall = "med-small";
+                            ratingColor = "#dbfc03";
+                        }
+                        else if (item.AggregatedRating < 50)
+                        {
+                            ratingClass = "low";
+                            ratingClassSmall = "low-small";
+                            ratingColor = "#d9042b";
+                        }
                     <tr>
 
                         <td>
                             @if (item.AggregatedRating != 0)
                             {
-                                @Html.DisplayFor(modelItem => item.AggregatedRating)
+                                <div class="item @ratingClassSmall">
+
+                                    <h3>@ratingSide</h3>
+                                    <svg width="55" height="35" xmlns="http://www.w3.org/2000/svg">
+                                        <g>
+                                            <circle id="circle" class="circle_animation" r="20" cy="20" cx="20" stroke-width="2" stroke="@ratingColor" fill="none" />
+                                        </g>
+                                    </svg>
+                                </div>
                             }
                             else
                             {
@@ -80,19 +111,49 @@
             </tbody>
         </table>
     </div>
-
+   
     <div class="col-md-3">
         <div class="sidebar-nav pull-right">
             <div class="well">
                 <h2>Available now</h2>
                 @foreach (var item in Model.GetGames(5))
-                {
+                {  string ratingClass = "";
+                        string ratingClassSmall = "";
+                        string ratingColor = "";
+
+                        if (item.AggregatedRating >= 80)
+                        {
+                            ratingClass = "high";
+                            ratingClassSmall = "high-small";
+                            ratingColor = "#03fc56";
+                        }
+                        else if (item.AggregatedRating < 80 && item.AggregatedRating >= 50)
+                        {
+                            ratingClass = "med";
+                            ratingClassSmall = "med-small";
+                            ratingColor = "#dbfc03";
+                        }
+                        else if (item.AggregatedRating < 50)
+                        {
+                            ratingClass = "low";
+                            ratingClassSmall = "low-small";
+                            ratingColor = "#d9042b";
+                        }
+                    var ratingSide = item.AggregatedRating.ToString("N0");
                     <ul class="nav">
                         <a asp-page="./Details" asp-route-id="@item.GameID">
                             <li>
                                 @if (item.AggregatedRating != 0 || item.AggregatedRating != null)
                                 {
-                                    @Html.DisplayFor(modelItem => item.AggregatedRating)
+                                    <div class="item @ratingClassSmall">
+
+                                        <h3>@ratingSide</h3>
+                                        <svg width="55" height="35" xmlns="http://www.w3.org/2000/svg">
+                                            <g>
+                                                <circle id="circle" class="circle_animation" r="20" cy="20" cx="20" stroke-width="2" stroke="@ratingColor" fill="none" />
+                                            </g>
+                                        </svg>
+                                    </div>
                                 }
                                 else
                                 {
