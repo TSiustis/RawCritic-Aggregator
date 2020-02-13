@@ -109,10 +109,11 @@
                                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                             </td>
                         }
-                        <td>
-
-                            @Html.DisplayFor(modelItem => item.ReleaseDate)
-                        </td>
+                    <td>
+                        @{var date = item.ReleaseDate.ToString("D");
+                            @Html.DisplayFor(modelItem => date);
+                        }
+                    </td>
 
                     </tr>
                 }

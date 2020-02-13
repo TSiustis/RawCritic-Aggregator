@@ -52,23 +52,14 @@
                     if (item.AggregatedRating >= 80)
                     {
                         ratingClass = "high";
-                        ratingClassSmall = "high-small";
-                        ratingColor = "#03fc56";
-                        ratingImage = "https://storage.cloud.google.com/rawcritic.appspot.com/high.png";
                     }
                     else if (item.AggregatedRating < 80 && item.AggregatedRating >= 50)
                     {
                         ratingClass = "med";
-                        ratingClassSmall = "med-small";
-                        ratingColor = "#dbfc03";
-                        ratingImage = "https://storage.cloud.google.com/rawcritic.appspot.com/high.png";
                     }
                     else if (item.AggregatedRating < 50)
                     {
                         ratingClass = "low";
-                        ratingClassSmall = "low-small";
-                        ratingColor = "#d9042b";
-                        ratingImage = "https://storage.cloud.google.com/rawcritic.appspot.com/high.png";
                     }
 
                     var rating = item.AggregatedRating.ToString("N0");
@@ -109,10 +100,11 @@
                                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                             </td>
                         }
-                        <td>
-
-                            @Html.DisplayFor(modelItem => item.ReleaseDate)
-                        </td>
+                    <td>
+                        @{var date = item.ReleaseDate.ToString("D");
+                            @Html.DisplayFor(modelItem => date);
+                        }
+                    </td>
 
                     </tr>
                 }
