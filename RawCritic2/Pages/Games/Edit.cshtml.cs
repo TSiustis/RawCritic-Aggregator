@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using RawCritic2.Data;
 using RawCritic2.Models;
 using RawCritic2.Services;
@@ -14,9 +15,8 @@ namespace RawCritic2.Pages.Games
 {
     public class EditModel : GamePageModelService
     {
-        private readonly RawCritic2.Data.ApplicationDbContext _context;
 
-        public EditModel(RawCritic2.Data.ApplicationDbContext context) : base(context)
+        public EditModel(ApplicationDbContext context, IMemoryCache memoryCache) : base(context, memoryCache)
         {
             _context = context;
         }

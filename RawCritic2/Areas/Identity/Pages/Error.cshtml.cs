@@ -13,6 +13,9 @@ namespace RawCritic2.Areas.Identity.Pages
     [AllowAnonymous]
     public class ErrorModel : PageModel
     {
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
         public string RequestId { get; set; }
 
         public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);

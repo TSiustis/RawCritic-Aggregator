@@ -27,10 +27,10 @@ namespace RawCritic2.Models
             {
                 // Look for any movies.
                 IGDBApi client = Client.Create("7aaa66047512155bfb9c4383cc87337f");
-                //if (context.Game.Any())
-                //{
-                //    return;   // DB has been seeded
-                //}
+                if (context.Game.Any())
+                {
+                    return;   // db has been seeded
+                }
                 GameJSON[] GameJSONs = new GameJSON[1000];
 
                 // Task.Run(async () =>
@@ -38,47 +38,25 @@ namespace RawCritic2.Models
                 var coverSmall = "";
                 var artworkImageId = "";
 
-                
-                try
+                for (int i = 32001; i <= 33000; i++)
                 {
-                    //int i = _context.Game
-                    //   .OrderByDescending(p => p.GameID)
-                    //   .FirstOrDefault().GameID; ;
-                    int k = 10;
-                    string id = "";
-                    //for (; i < 100; i++)
-                    //{
-                        
-                            GameJSONs = await client.QueryAsync<GameJSON>(Client.Endpoints.Games, query: "fields name,cover.*,genres.*,platforms.*,artworks.image_id,release_dates.*,involved_companies.*,aggregated_rating,storyline,summary,rating_count; where id =(171,172,173,174,175,176,177,178,179,180);");
+                    try
+                    {
+                       
+                      
+                        GameJSONs = await client.QueryAsync<GameJSON>(Client.Endpoints.Games, query: "fields name,cover.*,genres.*,platforms.*,artworks.image_id,release_dates.*,involved_companies.*,aggregated_rating,storyline,summary,rating_count; where id =("+i.ToString()+");");
                         System.Diagnostics.Trace.WriteLine(client.ToString());
-                   
 
-                        //  context.GameJSON.Add(GameJSONs.FirstOrDefault());
-                        //     GameJSONs=JsonConvert.DeserializeObject<GameJSON>(GameJSONs.FirstOrDefault());
 
+                       
                         if (GameJSONs.FirstOrDefault() != null)
                         {
-                        
-                         
+
+
                             var genres = "";
                             var platforms = "";
                             var developer = "";
-                            //foreach (var item in GameJSONs)
-                            //{
-                            //    foreach (var item2 in item.Genres.Values)
-                            //    {
-                            //        genres.Add(item2);
-                            //        await context.AddAsync(item2);
-                            //    }
-                            //}
-                            //foreach (var item in GameJSONs)
-                            //{
-                            //    foreach (var item2 in item.Platforms.Values)
-                            //    {
-                            //        platforms.Add(item2);
-                            //        await context.AddAsync(item2);
-                            //    }
-                            //}
+                          
                             var bigCover = "";
                             if (coverSmall != null)
                             {
@@ -109,7 +87,14 @@ namespace RawCritic2.Models
                                         //            developer = item2.Company.Value.Name;
                                         //    }
                                         //}
-                                        game = new Game(item.Id, item.Name, DateTimeOffset.Parse(item.ReleaseDates.Values.First().Human), "http:" + item.Cover.Value.Url, genres, platforms, item.AggregatedRating, developer, "http:" + bigCover, item.Storyline, item.Summary, item.AggregatedRatingCount);
+                                        if (item.Storyline.Length > 4000)
+                                        {
+                                            game = new Game(item.Id, item.Name, DateTimeOffset.Parse(item.ReleaseDates.Values.First().Human), "http:" + item.Cover.Value.Url, genres, platforms, item.AggregatedRating, developer, "http:" + bigCover, item.Storyline.Substring(0, 4000), item.Summary, item.AggregatedRatingCount);
+                                        }else if(item.Summary.Length > 4000) {
+                                            game = new Game(item.Id, item.Name, DateTimeOffset.Parse(item.ReleaseDates.Values.First().Human), "http:" + item.Cover.Value.Url, genres, platforms, item.AggregatedRating, developer, "http:" + bigCover, item.Storyline, item.Summary.Substring(0, 4000), item.AggregatedRatingCount);
+                                        }
+                                        else
+                                            game = new Game(item.Id, item.Name, DateTimeOffset.Parse(item.ReleaseDates.Values.First().Human), "http:" + item.Cover.Value.Url, genres, platforms, item.AggregatedRating, developer, "http:" + bigCover, item.Storyline, item.Summary, item.AggregatedRatingCount);
                                         //   System.Diagnostics.Trace.WriteLine("game: " + Game.GetAllProperties(game));
                                         Game.GetAllProperties(game);
                                         if (game != null)
@@ -141,23 +126,23 @@ namespace RawCritic2.Models
 
                             //    System.Diagnostics.Trace.WriteLine(e1.ToString());
                             //}
-                        //}
+                            //}
 
-                       // System.Diagnostics.Trace.WriteLine("genres: " + genres);
-//System.Diagnostics.Trace.WriteLine("platforms: " + platforms);
-                        //System.Diagnostics.Trace.WriteLine("JSON: " + GameJSONs.FirstOrDefault().Name + GameJSONs.FirstOrDefault().Artworks.Values + GameJSONs.FirstOrDefault().Cover.Value.Url + GameJSONs.FirstOrDefault().Genres.Values.FirstOrDefault().Name + GameJSONs.FirstOrDefault().ReleaseDates.Values + GameJSONs.FirstOrDefault().Platforms.Values.FirstOrDefault().Name);
-                        //  System.Diagnostics.Trace.WriteLine(GameJSON.GetAllProperties(GameJSONs.FirstOrDefault()));
+                            // System.Diagnostics.Trace.WriteLine("genres: " + genres);
+                            //System.Diagnostics.Trace.WriteLine("platforms: " + platforms);
+                            //System.Diagnostics.Trace.WriteLine("JSON: " + GameJSONs.FirstOrDefault().Name + GameJSONs.FirstOrDefault().Artworks.Values + GameJSONs.FirstOrDefault().Cover.Value.Url + GameJSONs.FirstOrDefault().Genres.Values.FirstOrDefault().Name + GameJSONs.FirstOrDefault().ReleaseDates.Values + GameJSONs.FirstOrDefault().Platforms.Values.FirstOrDefault().Name);
+                            //  System.Diagnostics.Trace.WriteLine(GameJSON.GetAllProperties(GameJSONs.FirstOrDefault()));
+                        }
+
                     }
-
-                }
-                catch (Exception e)
-                {
-                    System.Diagnostics.Trace.WriteLine(client.ToString());
-                    System.Diagnostics.Trace.WriteLine(e.ToString());
-                    //System.Diagnostics.Trace.WriteLine("JSON: " + GameJSONs.FirstOrDefault().Name + GameJSONs.FirstOrDefault().Artworks.Values + GameJSONs.FirstOrDefault().Cover.Value.Url + GameJSONs.FirstOrDefault().Genres.Values.FirstOrDefault().Name + GameJSONs.FirstOrDefault().ReleaseDates.Values);
-                    //System.Diagnostics.Trace.WriteLine(GameJSON.GetAllProperties(GameJSONs.FirstOrDefault()));
-                }
-
+                    catch (Exception e)
+                    {
+                        System.Diagnostics.Trace.WriteLine(client.ToString());
+                        System.Diagnostics.Trace.WriteLine(e.ToString());
+                        //System.Diagnostics.Trace.WriteLine("JSON: " + GameJSONs.FirstOrDefault().Name + GameJSONs.FirstOrDefault().Artworks.Values + GameJSONs.FirstOrDefault().Cover.Value.Url + GameJSONs.FirstOrDefault().Genres.Values.FirstOrDefault().Name + GameJSONs.FirstOrDefault().ReleaseDates.Values);
+                        //System.Diagnostics.Trace.WriteLine(GameJSON.GetAllProperties(GameJSONs.FirstOrDefault()));
+                    }
+                }//end for
                 context.SaveChanges();
             }
 

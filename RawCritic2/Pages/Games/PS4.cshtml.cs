@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using RawCritic2.Data;
 using RawCritic2.Models;
 using RawCritic2.Services;
@@ -13,24 +14,35 @@ namespace RawCritic2.Pages.Games
 {
     public class PS4Model : GamePageModelService
     {
-        [BindProperty(SupportsGet = true)]
-        public int CurrentPage { get; set; } = 1;
-        public int Count { get; set; }
-        public int PageSize { get; set; } = 10;
-        private readonly RawCritic2.Data.ApplicationDbContext _context;
+        //private readonly RawCritic2.Data.ApplicationDbContext _context;
         public IQueryable<Game> Games { get; set; }
-        public PS4Model(RawCritic2.Data.ApplicationDbContext context) : base(context)
+        public PS4Model(ApplicationDbContext context, IMemoryCache memoryCache) : base(context, memoryCache)
         {
             _context = context;
         }
-        public int TotalPages => (int)Math.Ceiling(decimal.Divide(_context.Game.Count(), PageSize));
-        public IList<Game> Game { get; set; }
+        public IQueryable<Game> Game { get; set; }
 
-        public IList<Models.Game> Data { get; set; }
+        public IEnumerable<Models.Game> Data { get; set; }
+        public string CurrentFilter { get;  set; }
+
         public async Task OnGetAsync()
         {
-            Data = await GetPaginatedResult(CurrentPage, PageSize);
-            Game = await GetCategoryAsync("Play Station4", SearchString);
+            var game =  from g in _context.Game
+                       select g;
+            string TestString;
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+                Data = await _context.Game.Where(s => s.Title.Contains(SearchString)).OrderByDescending(d => d.AggregatedRating).ToListAsync();
+            }
+            else
+            {
+                Data = await GetPaginatedResult(CurrentPage, "Playstation 4", PageSize);
+            }
+
+
+          //  Game = await GetCategoryAsync("Play Station4", SearchString);
+
+           // Game = await GetPaginatedResult(CurrentPage, PageSize);
         }
         public IQueryable<Game> GetGames(int i)
         {
@@ -48,17 +60,8 @@ namespace RawCritic2.Pages.Games
             }
             return result;
         }
-        public async Task<IList<Game>> GetPaginatedResult(int currentPage, int pageSize = 10)
-        {
-            var data = _context.Game.Select(s => s).Where(s => s.platforms.Contains("PlayStation 4")); ;
-            return await data.OrderByDescending(d => d.AggregatedRating).Skip((currentPage - 1) * pageSize).Take(pageSize).ToListAsync();
-        }
+       
 
-        public async Task<int> GetCount()
-        {
-
-            return _context.Game.Count();
-        }
 
     }
 }

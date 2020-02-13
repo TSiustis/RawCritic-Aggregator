@@ -14,6 +14,9 @@ namespace RawCritic2.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class ForgotPasswordModel : PageModel
     {
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IEmailSender _emailSender;
 

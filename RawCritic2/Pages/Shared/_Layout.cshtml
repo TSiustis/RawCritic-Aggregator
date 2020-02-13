@@ -32,7 +32,7 @@
 </head>
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
+        <div class="containe-fluidr">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
                     <span class="sr-only">Toggle navigation</span>
@@ -66,30 +66,40 @@
 
                 </ul>
                 @*<div class="col-sm-3 col-md-3">
-                    @using (Html.BeginForm("Index", "Games", FormMethod.Get, new { @class = "navbar-form" }))
-                    {
-                        <div class="input-group">
-                            <input type="text" class="form-control" name="SearchString" value="@ViewBag.CurrentFilter" placeholder="Search">
-                            <div class="input-group-btn">
-                                <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
-                            </div>
-                        </div>
-                    }
-                </div>*@
-                
+            @using (Html.BeginForm("Index", "Games", FormMethod.Get, new { @class = "navbar-form" }))
+            {
+                <div class="input-group">
+                    <input type="text" class="form-control" name="SearchString" value="@ViewBag.CurrentFilter" placeholder="Search">
+                    <div class="input-group-btn">
+                        <button class="btn btn-default" type="submit"><i class="glyphicon glyphicon-search"></i></button>
+                    </div>
+                </div>
+            }
+        </div>*@
 
-                <partial name="_LoginPartial" />
-            </div>
+            <div class="nav navbar-right" style="margin-top:8px;">
+                <form asp-page="/Games/" class="nav-item " method="get">
 
-               
-
+                    <div class="searchbar nav navbar-nav">
+                        @* <li>@Html.TextBox("SearchString", Model.SearchString as string)</li>*@
+                        
+                            <input class="search_input" placeholder="Search..." type="text" name="SearchString" asp-route-searchString="@Model.SearchString" />
+                            <a href="#" type="submit" value="Search"><i class="fa fa-search"></i></a>
+                        
+                    </div>
+                </form>
             
 
-        </div>
-        
-    </nav>
 
-        <partial name="_CookieConsentPartial" />
+
+
+            </div>
+               
+            @*<partial name="_LoginPartial" />*@
+    
+                    </nav>
+
+        @*<partial name="_CookieConsentPartial" />*@
 
         <div class="container body-content">
             @RenderBody()
@@ -100,6 +110,7 @@
         </div>
 
         <environment include="Development">
+            <script src="https://use.fontawesome.com/464bdd9395.js"></script>
             <script src="~/lib/jquery/dist/jquery.js"></script>
             <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
             <script src="~/js/site.js" asp-append-version="true"></script>
@@ -120,6 +131,7 @@
             </script>
             <script src="~/js/site.min.js" asp-append-version="true"></script>
             <script src="~/js/main.js" asp-append-version="true"></script>
+            <script src="https://use.fontawesome.com/464bdd9395.js"></script>
         </environment>
 
         @RenderSection("Scripts", required: false)

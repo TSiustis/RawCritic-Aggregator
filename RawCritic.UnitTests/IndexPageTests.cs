@@ -16,6 +16,8 @@ namespace RawCritic.UnitTests
 {
     public class IndexPageTests
     {
+
+        public IMemoryCache _memoryCache;
         [Fact]
         public async Task OnGetAsync_PopulatesThePageModel_WithAListOfMessages()
         {
@@ -27,7 +29,7 @@ namespace RawCritic.UnitTests
             var expectedMessages = ApplicationDbContext.GetSeedingMessages();
             mockAppDbContext.Setup(
                 db => db.GetGamesAsync()).Returns(Task.FromResult(expectedMessages));
-            var pageModel = new IndexModel(mockAppDbContext.Object);
+            var pageModel = new IndexModel(mockAppDbContext.Object,_memoryCache);
             #endregion
 
             #region act

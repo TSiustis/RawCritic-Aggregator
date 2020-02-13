@@ -52,12 +52,12 @@ namespace RawCritic2
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
             }
-
             host.Run();
         }
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
+                .UseEnvironment("Development")
                 .UseStartup<Startup>();
     }
 }

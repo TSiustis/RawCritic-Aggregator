@@ -13,6 +13,9 @@ namespace RawCritic2.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LogoutModel : PageModel
     {
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LogoutModel> _logger;
 

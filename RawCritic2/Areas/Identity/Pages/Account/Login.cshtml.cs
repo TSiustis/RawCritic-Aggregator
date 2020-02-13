@@ -20,6 +20,8 @@ namespace RawCritic2.Areas.Identity.Pages.Account
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
         public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
         {
             _signInManager = signInManager;

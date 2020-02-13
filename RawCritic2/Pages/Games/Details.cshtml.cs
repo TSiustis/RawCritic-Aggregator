@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Caching.Memory;
 using RawCritic2.Data;
 using RawCritic2.Models;
 using RawCritic2.Services;
@@ -13,10 +14,9 @@ namespace RawCritic2.Pages.Games
 {
     public class DetailsModel : GamePageModelService
     {
-        private readonly RawCritic2.Data.ApplicationDbContext _context;
         public IList<Game> Games { get; set; }
         public string platformsFound { get; set; }
-        public DetailsModel(RawCritic2.Data.ApplicationDbContext context) : base(context)
+        public DetailsModel(ApplicationDbContext context, IMemoryCache memoryCache) : base(context, memoryCache)
         {
             _context = context;
         }

@@ -17,6 +17,9 @@ namespace RawCritic2.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+
+        [BindProperty(SupportsGet = true)]
+        public string SearchString { get; set; }
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly UserManager<IdentityUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;

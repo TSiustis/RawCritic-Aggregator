@@ -1,1 +1,248 @@
-﻿body{padding-top:50px;padding-bottom:20px}.body-content{padding-left:15px;padding-right:15px}.carousel-caption p{font-size:20px;line-height:1.4}.carousel-inner .item img[src$=".svg"]{width:100%}#qrCode{margin:15px}@media screen and (max-width:767px){.carousel-caption{display:none}}
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px
+}
+
+tr {
+    height: 50px
+}
+
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px
+}
+
+.nav > li {
+    border-style: none
+}
+
+.searchbar {
+    margin-bottom: auto;
+    margin-top: auto;
+    height: auto;
+    background-color: #323740;
+    padding-right: 20px;
+    padding-bottom: 20px;
+    padding-top: 10px
+}
+
+.search_input {
+    color: #fff;
+    border: 0;
+    outline: 0;
+    background: 0 0;
+    width: 0;
+    float: right;
+    display: flex;
+    justify-content: center;
+    caret-color: transparent;
+    transition: width .4s linear
+}
+
+.searchbar:hover > .search_input {
+    padding: 0 10px;
+    width: 200px;
+    caret-color: red;
+    transition: width .4s linear
+}
+
+.searchbar:hover > .search_icon {
+    background: #fff;
+    color: #e74c3c
+}
+
+.search_icon {
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    text-decoration: none
+}
+
+.carousel-inner .img-fluid {
+    height: -o-calc(100vh) !important;
+    height: -webkit-calc(100vh - 165px) !important;
+    height: -moz-calc(100vh - 165px) !important;
+    height: calc(100vh - 165px) !important;
+    overflow: hidden;
+    display: inline-block;
+    text-align: center
+}
+
+a {
+    text-decoration: none
+}
+
+.carousel-control span {
+    display: inline-block;
+    position: absolute;
+    top: 50%;
+    z-index: 5
+}
+
+.carousel-item .img-fluid {
+    width: 100%;
+    height: auto
+}
+
+.carousel-item a {
+    display: block;
+    width: 100%
+}
+
+.carousel-caption p {
+    font-size: 20px;
+    line-height: 1.4
+}
+
+.expand {
+    height: 1em;
+    padding: 2px;
+    overflow: hidden
+}
+
+.carousel-inner .item img[src$=".svg"] {
+    width: 100%
+}
+
+li {
+    border-bottom: 1px solid #000
+}
+
+#qrCode {
+    margin: 15px
+}
+
+svg {
+    transform: rotate(-90deg)
+}
+
+.circle_animation {
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440
+}
+
+.low .circle_animation {
+    -webkit-animation: low 1s ease-out forwards;
+    animation: low 1s ease-out forwards
+}
+
+.med .circle_animation {
+    -webkit-animation: low 1s ease-out forwards;
+    animation: low 1s ease-out forwards
+}
+
+.high .circle_animation {
+    -webkit-animation: low 1s ease-out forwards;
+    animation: low 1s ease-out forwards
+}
+
+.low-small .circle_animation {
+    -webkit-animation: low 1s ease-out backwards;
+    animation: low 1s ease-out backwards
+}
+
+.med .circle_animation {
+    -webkit-animation: med 1s ease-out backwards;
+    animation: med 1s ease-out backwards
+}
+
+.med-small .circle_animation {
+    -webkit-animation: med 1s ease-out backwards;
+    animation: med 1s ease-out backwards
+}
+
+.high-small .circle_animation {
+    -webkit-animation: high 1s ease-out backwards;
+    animation: high 1s ease-out backwards;
+    width: 10% !important
+}
+
+@-webkit-keyframes low {
+    to {
+        stroke-dashoffset: 250
+    }
+}
+
+@keyframes low {
+    to {
+        stroke-dashoffset: 250
+    }
+}
+
+@-webkit-keyframes med {
+    to {
+        stroke-dashoffset: 160
+    }
+}
+
+@keyframes med {
+    to {
+        stroke-dashoffset: 160
+    }
+}
+
+@-webkit-keyframes high {
+    to {
+        stroke-dashoffset: 10
+    }
+}
+
+@keyframes high {
+    to {
+        stroke-dashoffset: 10
+    }
+}
+
+@-webkit-keyframes low-small {
+    to {
+        stroke-dashoffset: 250
+    }
+}
+
+@keyframes low-small {
+    to {
+        stroke-dashoffset: 250
+    }
+}
+
+@-webkit-keyframes med-small {
+    to {
+        stroke-dashoffset: 160
+    }
+}
+
+@keyframes med-small {
+    to {
+        stroke-dashoffset: 160
+    }
+}
+
+@-webkit-keyframes high-small {
+    to {
+        stroke-dashoffset: 700
+    }
+}
+
+@keyframes high-small {
+    to {
+        stroke-dashoffset: 700
+    }
+}
+
+@media screen and (max-width:767px) {
+    .carousel-caption {
+        display: none
+    }
+}
+
+ol, ul {
+    padding: 0;
+    margin: 0;
+    list-style-type: none
+}
+
+li {
+    cursor: pointer
+}
