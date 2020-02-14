@@ -10,7 +10,7 @@
         @if (Model.Game.BigCover != null)
         {
         <div class="game">
-            <img src="@Html.DisplayFor(model => model.Game.BigCover)" class="img-responsive" style="width:auto" alt="">
+            <img src="@Html.DisplayFor(model => model.Game.BigCover)" class="img-responsive" style="width:100%" alt="">
         </div>
         }
 
@@ -20,47 +20,29 @@
                  ">
                 @{
                     string ratingClass = "";
-                    string ratingClassSmall = "";
-                    string ratingColor = "";
 
                     if (@Model.Game.AggregatedRating >= 80)
                     {
                         ratingClass = "high";
-                        ratingClassSmall = "high-small";
-                        ratingColor = "#03fc56";
                     }
                     else if (@Model.Game.AggregatedRating < 80 && @Model.Game.AggregatedRating >= 50)
                     {
                         ratingClass = "med";
-                        ratingClassSmall = "med-small";
-                        ratingColor = "#dbfc03";
                     }
                     else if (@Model.Game.AggregatedRating < 50)
                     {
                         ratingClass = "low";
-                        ratingClassSmall = "low-small";
-                        ratingColor = "#d9042b";
                     }
                 }
                 <h2 class="title"> @Html.DisplayFor(model => model.Game.Title)</h2>
-                <div class="item @ratingClass">
+                <div class="@ratingClass">
 
                     @{ var rating = Model.Game.AggregatedRating.ToString("N0"); }
-                    <h2>@rating</h2>
-                    <svg width="160" height="160" xmlns="http://www.w3.org/2000/svg">
-                        <g>
-                            <circle id="circle" class="circle_animation" r="69.85699" cy="81" cx="81" stroke-width="8" stroke="@ratingColor" fill="none" />
-                        </g>
-                    </svg>
-                </div> <h2> @Html.DisplayFor(model => model.Game.Title)</h2>
+                   @rating
+                    
+                </div> 
                 <h2>Game Information</h2>
-                <hr />
-                @*Available on:   <ul>*@
-                @*@foreach (var item in Model.GetPlatforms(Model.Game.platforms))
-        {
-                            <li>item</li>
-        }
-        </ul>*@
+             
                 <table>
         <tr><td>Available on:</td></tr>
         <tr>
@@ -95,15 +77,9 @@
 
                             <li>
                                 <nobr>
-                                    <a asp-page="./Details" asp-route-id="@item.GameID"><div class="item @ratingClassSmall">
-
-    <h3>@ratingSide</h3>
-    <svg width="55" height="35" xmlns="http://www.w3.org/2000/svg">
-        <g>
-            <circle id="circle" class="circle_animation" r="20" cy="20" cx="20" stroke-width="2" stroke="@ratingColor" fill="none" />
-        </g>
-    </svg>
-</div> @item.Title</a> <img src="@item.Cover" height="50px" style="border-radius: 60%" />
+                                    <a asp-page="./Details" asp-route-id="@item.GameID">
+    <span class="@ratingClass">@ratingSide</span> @item.Title</a>
+                                    <img src="@item.Cover" height="50px" style="border-radius: 60%" />
                                 </nobr>
                             </li>
 
@@ -118,39 +94,6 @@
                     </ul>
 
                 </div>
-
-                @*<h2>Upcoming Releases</h2>
-
-                <ul class="nav">
-
-                    <li>
-                        <h6>@Html.DisplayFor(model => model.Game.AggregatedRating)</h6>    @Html.DisplayFor(model => model.Game.Title)  <img src="@Model.Game.Cover" height="50px" style="border-radius: 60%" />
-                    </li>
-
-                    <li>
-                        @Html.DisplayFor(model => model.Game.Platform)
-                    </li>
-                    <li>
-                        @Html.DisplayFor(model => model.Game.Developer)
-                    </li>
-                </ul>
-
-
-                <h2>Reviewed today</h2>
-
-                <ul class="nav">
-                    <li>
-                        <h6>@Html.DisplayFor(model => model.Game.AggregatedRating)</h6> @Html.DisplayFor(model => model.Game.Title)  <img src="@Model.Game.Cover" height="50px" style="border-radius: 60%" />
-                    </li>
-
-
-                    <li>
-                        @Html.DisplayFor(model => model.Game.Platform)
-                    </li>
-                    <li>
-                        @Html.DisplayFor(model => model.Game.Developer)
-                    </li>
-                </ul>*@
 
 
 

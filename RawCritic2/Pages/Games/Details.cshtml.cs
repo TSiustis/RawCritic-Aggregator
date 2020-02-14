@@ -29,6 +29,18 @@ namespace RawCritic2.Pages.Games
             {
                 return NotFound();
             }
+            var game = from g in _context.Game
+                       select g;
+            string TestString;
+            if (!string.IsNullOrEmpty(SearchString))
+            {
+               // Game = await _context.Game.Where(s => s.Title.Contains(SearchString)).OrderByDescending(d => d.AggregatedRating).ToListAsync();
+                return RedirectToAction("Index");
+            }
+            else
+            {
+               // Game = await GetPaginatedResult(CurrentPage, "Playstation 4", PageSize);
+            }
 
             Game = await _context.Game.FirstOrDefaultAsync(m => m.GameID == id);
 

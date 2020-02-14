@@ -19,7 +19,18 @@ tr {
    
    
 }
-.nav >li {
+.games-single-page  {
+    width: 100%;
+}
+.games-single-page .container {
+    width:100%;
+}
+.game {
+    margin-left: calc(50% - 50vw);
+    width: 100vw;
+    height:55vw;
+}
+    .nav >li {
     border-style: none;
 }
 .searchbar {
