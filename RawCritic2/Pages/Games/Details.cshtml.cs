@@ -25,29 +25,30 @@ namespace RawCritic2.Pages.Games
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            //if (id == null)
+            //{
+            //    return NotFound();
+            //}
             var game = from g in _context.Game
                        select g;
-            string TestString;
             if (!string.IsNullOrEmpty(SearchString))
             {
                // Game = await _context.Game.Where(s => s.Title.Contains(SearchString)).OrderByDescending(d => d.AggregatedRating).ToListAsync();
-                return RedirectToAction("Index");
+              //  return RedirectToAction("SearchResults","Data");
+                return Redirect("~/SearchResults?SearchString=" + SearchString);
             }
             else
             {
-               // Game = await GetPaginatedResult(CurrentPage, "Playstation 4", PageSize);
+                // Game = await GetPaginatedResult(CurrentPage, "Playstation 4", PageSize);
+
+                Game = await _context.Game.FirstOrDefaultAsync(m => m.GameID == id);
             }
 
-            Game = await _context.Game.FirstOrDefaultAsync(m => m.GameID == id);
 
-            if (Game == null)
-            {
-                return NotFound();
-            }
+            //if (Game == null)
+            //{
+            //    return NotFound();
+            //}
             return Page();
         }
         public  async Task<List<Game>> GetGamesToday(string platform, string searchString)

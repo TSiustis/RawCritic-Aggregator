@@ -34,7 +34,10 @@ namespace RawCritic2.Services
             _memoryCache = memoryCache;
             _context = context;
         }
-       
+        public GamePageModelService(ApplicationDbContext context)
+        {
+            _context = context;
+        }
         static readonly object cacheLock = new object();
 
         public async Task<IEnumerable<Game>> GetPaginatedResult(int currentPage,  string platform,int pageSize = 10)
