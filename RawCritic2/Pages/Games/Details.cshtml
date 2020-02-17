@@ -35,27 +35,33 @@
                     }
                 }
                 <h2 class="title"> @Html.DisplayFor(model => model.Game.Title)</h2>
-                <div class="@ratingClass">
+                <span class="@ratingClass">
 
                     @{ var rating = Model.Game.AggregatedRating.ToString("N0"); }
                    @rating
                     
-                </div> 
+                </span> 
                 <h2>Game Information</h2>
              
                 <table>
-        <tr><td>Available on:</td></tr>
-        <tr>
-            @*@foreach (var item2 in Model.GetPlatforms(Model.Game.platforms))
+                    <tr>
+                        <td><h4>Available on:</h4></td>
+                        <td nowrap><h4>Release date:</h4></td>
+                    </tr>
+                    <tr>
+                        @*@foreach (var item2 in Model.GetPlatforms(Model.Game.platforms))
         {*@
-            @{ string platforms = Model.GetPlatforms(Model.Game.platforms);}
-            <td style="white-space: pre-line"> @Html.Raw(System.Web.HttpUtility.HtmlEncode(platforms))</td>
-            @*}*@
-        </tr>
-            <tr>
-                @Html.DisplayFor(model => model.Game.ReleaseDate)
-            </tr>
-        </table>
+                         @{ string platforms = Model.GetPlatforms(Model.Game.platforms);}
+                       
+                        <td style="white-space: pre-line;width:100%"> @Html.Raw(System.Web.HttpUtility.HtmlEncode(platforms))</td>
+                        <td nowrap>
+                            @{var date = Model.Game.ReleaseDate.ToString("D");
+                                @Html.DisplayFor(modelItem => date);
+                            }
+                        </td>
+                        @*}*@
+                        <tr> 
+                </table>
                 <h3>Summary</h3>
                 <p>@Html.DisplayFor(model => model.Game.Summary)</p>
                 @if (Model.Game.Storyline != null)
@@ -73,12 +79,28 @@
                     <ul class="nav">
                         @foreach (var item in Model.GetGamesHighScore(70))
                         {
-                            var ratingSide = item.AggregatedRating.ToString("N0"); 
+                            var ratingSide = item.AggregatedRating.ToString("N0");
+                            
+                                
 
+                                if (item.AggregatedRating >= 80)
+                                {
+                                    ratingClass = "high";
+                                }
+                                else if (item.AggregatedRating < 80 && @Model.Game.AggregatedRating >= 50)
+                                {
+                                    ratingClass = "med";
+                                }
+                                else if (item.AggregatedRating < 50)
+                                {
+                                    ratingClass = "low";
+                                }
+                            
                             <li>
                                 <nobr>
                                     <a asp-page="./Details" asp-route-id="@item.GameID">
-    <span class="@ratingClass">@ratingSide</span> @item.Title</a>
+                                        <span class="@ratingClass">@ratingSide</span> @item.Title
+                                    </a>
                                     <img src="@item.Cover" height="50px" style="border-radius: 60%" />
                                 </nobr>
                             </li>

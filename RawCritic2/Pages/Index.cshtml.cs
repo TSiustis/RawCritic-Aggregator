@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -49,11 +50,12 @@ namespace RawCritic2.Pages
                        select g;
             if (!string.IsNullOrEmpty(SearchString))
             {
-                game =  game.Where(s => s.Title.Equals(SearchString)).OrderByDescending(s => s.AggregatedRating);
+                game = game.Where(s => s.Title.Equals(SearchString)).OrderByDescending(s => s.AggregatedRating);
 
-                return  RedirectToPage("/Games/Index");
+                return Redirect("~/SearchResults?SearchString=" + WebUtility.HtmlEncode(SearchString));
             }
-            return   Page();
+               
+            return Page();
         }
         //public async Task OnGetAsync(int? id)
         //{

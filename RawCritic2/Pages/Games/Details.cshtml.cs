@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -25,17 +26,15 @@ namespace RawCritic2.Pages.Games
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            //if (id == null)
-            //{
-            //    return NotFound();
-            //}
+            if (id == null)
+            {
+                return NotFound();
+            }
             var game = from g in _context.Game
                        select g;
             if (!string.IsNullOrEmpty(SearchString))
             {
-               // Game = await _context.Game.Where(s => s.Title.Contains(SearchString)).OrderByDescending(d => d.AggregatedRating).ToListAsync();
-              //  return RedirectToAction("SearchResults","Data");
-                return Redirect("~/SearchResults?SearchString=" + SearchString);
+                return Redirect("~/SearchResults?SearchString=" + WebUtility.HtmlEncode(SearchString));
             }
             else
             {
@@ -45,10 +44,10 @@ namespace RawCritic2.Pages.Games
             }
 
 
-            //if (Game == null)
-            //{
-            //    return NotFound();
-            //}
+            if (Game == null)
+            {
+                return NotFound();
+            }
             return Page();
         }
         public  async Task<List<Game>> GetGamesToday(string platform, string searchString)

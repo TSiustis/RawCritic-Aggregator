@@ -109,14 +109,14 @@
                                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
                             </td>
                         }
-                    <td>
-                        @{var date = item.ReleaseDate.ToString("D");
-                            @Html.DisplayFor(modelItem => date);
-                        }
-                    </td>
+                        <td>
+                            @{var date = item.ReleaseDate.ToString("D");
+                                @Html.DisplayFor(modelItem => date);
+                            }
+                        </td>
 
                     </tr>
-                }
+                                }
         </table>
     </div>
 
@@ -181,21 +181,25 @@
     </div>
 
 </div>
-<div>
-    <ul class="pagination">
-        <li class="page-item @(!Model.ShowFirst? "disabled":"")">
-            <a asp-page="./Index" asp-route-CurrentPage="1" class="page-link"><i class="fa fa-fast-backward"></i></a>
-        </li>
+@{ if (Model.SearchString == null)
+    {
+        <div>
+            <ul class="pagination">
+                <li class="page-item @(!Model.ShowFirst ? "disabled" : "")">
+                    <a asp-page="./XboxOne" asp-route-CurrentPage="1" class="page-link"><i class="fa fa-fast-backward"></i></a>
+                </li>
 
-        <li class="page-item @(!Model.ShowPrevious? "disabled":"")">
-            <a asp-page="./Index" asp-route-CurrentPage="@(Model.CurrentPage -1)" class="page-link"><i class="fa fa-step-backward"></i></a>
-        </li>
-        <li class="page-item  @(!Model.ShowNext? "disabled":"")">
-            <a asp-page="./Index" asp-route-currentpage="@(Model.CurrentPage + 1)" class="page-link"><i class="fa fa-step-forward"></i></a>
-        </li>
+                <li class="page-item @(!Model.ShowPrevious ? "disabled" : "")">
+                    <a asp-page="./XboxOne" asp-route-CurrentPage="@(Model.CurrentPage - 1)" class="page-link"><i class="fa fa-step-backward"></i></a>
+                </li>
+                <li class="page-item  @(!Model.ShowNext ? "disabled" : "")">
+                    <a asp-page="./XboxOne" asp-route-currentpage="@(Model.CurrentPage + 1)" class="page-link"><i class="fa fa-step-forward"></i></a>
+                </li>
 
-        <li class="page-item  @(!Model.ShowLast? "disabled":"")">
-            <a asp-page="./Index" asp-route-CurrentPage="@Model.TotalPages" class="page-link"><i class="fa fa-fast-forward"></i></a>
-        </li>
-    </ul>
-</div>
+                <li class="page-item  @(!Model.ShowLast ? "disabled" : "")">
+                    <a asp-page="./XboxOne" asp-route-CurrentPage="@Model.TotalPages" class="page-link"><i class="fa fa-fast-forward"></i></a>
+                </li>
+            </ul>
+        </div>
+        }
+    }

@@ -39,18 +39,7 @@ namespace RawCritic2.Pages.Games
                 Data = await GetPaginatedResult(CurrentPage, "", PageSize);
             }
         }
-        public async Task<IActionResult> OnGetData()
-        {
-            if (!string.IsNullOrEmpty(SearchString))
-            {
-                Data = await _context.Game.Where(s => s.Title.Contains(SearchString)).OrderByDescending(d => d.AggregatedRating).ToListAsync();
-            }
-            else
-            {
-                Data = await GetPaginatedResult(CurrentPage, "", PageSize);
-            }
-            return Page();
-        }
+      
         public IQueryable<Game> GetGames(int i)
         {
             Games = _context.Game.Take(i).OrderByDescending(s => s.AggregatedRating);

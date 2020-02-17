@@ -273,6 +273,7 @@ li {
     height: 36px;
     padding: 16px;
     margin-right: 10px;
+    margin-bottom:20px;
     background: #F52716;
     border: 2px solid #F52716;
     color: #fff;
@@ -285,6 +286,7 @@ li {
     height: 36px;
     padding: 16px;
     margin-right: 10px;
+    margin-bottom: 20px;
     background: #c9f013;
     border: 2px solid #c9f013;
     color: #fff;
@@ -296,7 +298,8 @@ li {
     width: 36px;
     height: 36px;
     padding: 16px;
-    margin-right:10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
     background: #00aa19;
     border: 2px solid #00aa19;
     color: #fff;

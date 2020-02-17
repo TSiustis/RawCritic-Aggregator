@@ -25,8 +25,8 @@ namespace RawCritic2.Pages.Games
         public IEnumerable<Models.Game> Data { get; set; }
         public async Task OnGetAsync()
         {
-            Data = await GetPaginatedResult(CurrentPage,"Play Station3",PageSize);
-            Game = await GetCategoryAsync("Play Station3", SearchString);
+            Data = await GetPaginatedResult(CurrentPage, "PlayStation 3", PageSize);
+            Game = await GetCategoryAsync("PlayStation 3", SearchString);
         }
         public IQueryable<Game> GetGames(int i)
         {
