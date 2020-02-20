@@ -16,38 +16,38 @@
 
             <div class="carousel-item item active">
 
-                <a asp-page="./Games/Details" asp-route-id="@Model.GetGame(4).GameID">
-                    <img src="@Model.GetGame(4).Cover" class="d-block  img-fluid" />
+                <a asp-page="./Games/Details" asp-route-id="@Model.GetGame(577).GameID">
+                    <img src="@Model.GetGame(577).Cover" class="d-block  img-fluid" />
                     <div class="carousel-caption d-none d-md-block" role="option">
-                        <p>
+                        @*<p>
 
                             @{var releasedate = Model.GetGame(4).ReleaseDate; }
                             Release Date:  @Html.DisplayFor(m => m.GetGame(4).ReleaseDate)
 
 
-                        </p>
+                        </p>*@
                     </div>
                 </a>
             </div>
             <div class="carousel-item item">
 
-                <a asp-page="./Games/Details" asp-route-id="@Model.GetGame(4).GameID">
-                    <img src="@Model.GetGame(5).BigCover" class="d-block   img-fluid"  />
+                <a asp-page="./Games/Details" asp-route-id="@Model.GetGame(883).GameID">
+                    <img src="@Model.GetGame(883).BigCover" class="d-block   img-fluid"  />
                     <div class="carousel-caption d-none d-md-block" role="option">
-                        <p>
+                        @*<p>
                             Release Date:  @Html.DisplayFor(m => m.GetGame(5).ReleaseDate)
 
-                        </p>
+                        </p>*@
                     </div>
                 </a>
             </div>
             <div class="carousel-item item">
 
-                <a asp-page="./Games/Details" asp-route-id="@Model.GetGame(7).GameID">
-                    <img src="@Model.GetGame(7).BigCover" class="d-block  img-fluid" />
+                <a asp-page="./Games/Details" asp-route-id="@Model.GetGame(868).GameID">
+                    <img src="@Model.GetGame(868).BigCover" class="d-block  img-fluid" />
                     <div class="carousel-caption d-none d-md-block" role="option">
                         <p>
-                            Release Date:  @Html.DisplayFor(m => m.GetGame(7).ReleaseDate)
+                            Release Date:  @Html.DisplayFor(m => m.GetGame(868).ReleaseDate)
 
                         </p>
                     </div>
