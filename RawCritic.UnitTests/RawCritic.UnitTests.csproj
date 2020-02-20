@@ -20,7 +20,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RawCritic2\RawCritic2.csproj" />
+    <ProjectReference Include="..\RawCritic2\RawCritic2.RazorPages.csproj" />
   </ItemGroup>
 
 </Project>

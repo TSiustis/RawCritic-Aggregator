@@ -77,10 +77,6 @@ namespace RawCritic2.Models
         public int TotalRatingCount { get; set; }
 
 
-        
-        [NotMapped]
-        [JsonProperty("websites")]
-        public IdentitiesOrValues<Website> Websites { get; set; }
 
 
         [NotMapped]
@@ -103,8 +99,6 @@ namespace RawCritic2.Models
         public int? Hypes { get; set; }
         [NotMapped]
         public IdentitiesOrValues<InvolvedCompany> InvolvedCompanies { get; set; }
-        [NotMapped]
-        public IdentitiesOrValues<Keyword> Keywords { get; set; }
        
         [NotMapped]
         public IdentityOrValue<Game> ParentGame { get; set; }
@@ -117,8 +111,6 @@ namespace RawCritic2.Models
         [NotMapped]
         public IdentitiesOrValues<ReleaseDate> ReleaseDates { get; set; }
         [NotMapped]
-        public IdentitiesOrValues<Screenshot> Screenshots { get; set; }
-        [NotMapped]
         public IdentitiesOrValues<Game> SimilarGames { get; set; }
 
         [NotMapped]
@@ -128,10 +120,6 @@ namespace RawCritic2.Models
 
         [NotMapped]
         public int[] Tags { get; set; }
-        [NotMapped]
-        public IdentitiesOrValues<Theme> Themes { get; set; }
-        [NotMapped]
-        public IdentityOrValue<TimeToBeat> TimeToBeat { get; set; }
 
         public double? TotalRating { get; set; }
 
@@ -141,7 +129,11 @@ namespace RawCritic2.Models
         public IdentityOrValue<Game> VersionParent { get; set; }
 
         public string VersionTitle { get; set; }
-
+        /// <summary>
+        ///  Used for testing the received properties
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns>A list of properties and their respective values.</returns>
         public static string GetAllProperties(object obj)
         {
             return string.Join(" ", obj.GetType()

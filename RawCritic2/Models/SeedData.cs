@@ -26,7 +26,7 @@ namespace RawCritic2.Models
                     DbContextOptions<ApplicationDbContext>>()))
             {
                 // Look for any movies.
-                IGDBApi client = Client.Create("7aaa66047512155bfb9c4383cc87337f");
+                IGDBApi client = Client.Create(""); //your IGDB API Key here
                 if (context.Game.Any())
                 {
                     return;   // db has been seeded
@@ -37,7 +37,7 @@ namespace RawCritic2.Models
                 //{
                 var coverSmall = "";
                 var artworkImageId = "";
-
+                //loop through the API and add Games to Database
                 for (int i = 32001; i <= 33000; i++)
                 {
                     try
@@ -79,14 +79,7 @@ namespace RawCritic2.Models
                                         {
                                             platforms += item2.Name + "/";
                                         }
-                                        //foreach (var item2 in item.InvolvedCompanies.Values)
-                                        //{
-                                        //    if (item2.Developer == true)
-                                        //    {
-                                        //        if (item2.Company.Value != null)
-                                        //            developer = item2.Company.Value.Name;
-                                        //    }
-                                        //}
+                                       //we need to trim the storyline and summary if higher than 4000 characters
                                         if (item.Storyline.Length > 4000)
                                         {
                                             game = new Game(item.Id, item.Name, DateTimeOffset.Parse(item.ReleaseDates.Values.First().Human), "http:" + item.Cover.Value.Url, genres, platforms, item.AggregatedRating, developer, "http:" + bigCover, item.Storyline.Substring(0, 4000), item.Summary, item.AggregatedRatingCount);
@@ -95,8 +88,8 @@ namespace RawCritic2.Models
                                         }
                                         else
                                             game = new Game(item.Id, item.Name, DateTimeOffset.Parse(item.ReleaseDates.Values.First().Human), "http:" + item.Cover.Value.Url, genres, platforms, item.AggregatedRating, developer, "http:" + bigCover, item.Storyline, item.Summary, item.AggregatedRatingCount);
-                                        //   System.Diagnostics.Trace.WriteLine("game: " + Game.GetAllProperties(game));
-                                        Game.GetAllProperties(game);
+                                        //used for testing locally
+                                       // Game.GetAllProperties(game);
                                         if (game != null)
                                             games.Prepend(game);
                                         try
@@ -116,22 +109,7 @@ namespace RawCritic2.Models
 
                                 }
                             }
-                            //try
-                            //{
-
-                            //    await context.AddRangeAsync(games);
-                            //}
-                            //catch (Exception e1)
-                            //{
-
-                            //    System.Diagnostics.Trace.WriteLine(e1.ToString());
-                            //}
-                            //}
-
-                            // System.Diagnostics.Trace.WriteLine("genres: " + genres);
-                            //System.Diagnostics.Trace.WriteLine("platforms: " + platforms);
-                            //System.Diagnostics.Trace.WriteLine("JSON: " + GameJSONs.FirstOrDefault().Name + GameJSONs.FirstOrDefault().Artworks.Values + GameJSONs.FirstOrDefault().Cover.Value.Url + GameJSONs.FirstOrDefault().Genres.Values.FirstOrDefault().Name + GameJSONs.FirstOrDefault().ReleaseDates.Values + GameJSONs.FirstOrDefault().Platforms.Values.FirstOrDefault().Name);
-                            //  System.Diagnostics.Trace.WriteLine(GameJSON.GetAllProperties(GameJSONs.FirstOrDefault()));
+                           
                         }
 
                     }
@@ -139,29 +117,12 @@ namespace RawCritic2.Models
                     {
                         System.Diagnostics.Trace.WriteLine(client.ToString());
                         System.Diagnostics.Trace.WriteLine(e.ToString());
-                        //System.Diagnostics.Trace.WriteLine("JSON: " + GameJSONs.FirstOrDefault().Name + GameJSONs.FirstOrDefault().Artworks.Values + GameJSONs.FirstOrDefault().Cover.Value.Url + GameJSONs.FirstOrDefault().Genres.Values.FirstOrDefault().Name + GameJSONs.FirstOrDefault().ReleaseDates.Values);
-                        //System.Diagnostics.Trace.WriteLine(GameJSON.GetAllProperties(GameJSONs.FirstOrDefault()));
                     }
                 }//end for
                 context.SaveChanges();
             }
 
 
-
-
-            //if (GameJSONs != null)
-            //{
-
-
-
-            //}
-
-            //     context.Game.Add(game);
-
-
-            //System.Diagnostics.Trace.WriteLine("Cover: " + coverSmall);
-            //}
-            //}).GetAwaiter().GetResult();
 
 
         }

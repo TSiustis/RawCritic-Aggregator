@@ -16,15 +16,11 @@ namespace RawCritic2.Models
     public int? Generation { get; set; }
     public int? Id { get; set; }
     public string Name { get; set; }
-    [NotMapped]
-    public IdentityOrValue<PlatformLogo> PlatformLogo { get; set; }
    
     public string Slug { get; set; }
     public string Summary { get; set; }
     public DateTimeOffset? UpdatedAt { get; set; }
     public string Url { get; set; }
-        [NotMapped]
-        public IdentitiesOrValues<PlatformVersion> Versions { get; set; }
         public static string GetAllProperties(object obj)
         {
             return string.Join(" ", obj.GetType()

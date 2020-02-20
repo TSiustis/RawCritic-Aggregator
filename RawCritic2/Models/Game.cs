@@ -11,10 +11,8 @@ namespace RawCritic2.Models
 {
     public class Game
     {
-        public string name;
         public string genres { get; set; }
         public string platforms { get; set; }
-        public string v;
         [Column(name: "release")]
         public int? releaseDate { get; set; }
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

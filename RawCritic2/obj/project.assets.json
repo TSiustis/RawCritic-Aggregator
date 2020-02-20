@@ -13714,9 +13714,9 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\siust\\source\\repos\\TSiustis\\RawCritic-Aggregator\\RawCritic2\\RawCritic2.csproj",
-      "projectName": "RawCritic2",
-      "projectPath": "C:\\Users\\siust\\source\\repos\\TSiustis\\RawCritic-Aggregator\\RawCritic2\\RawCritic2.csproj",
+      "projectUniqueName": "C:\\Users\\siust\\source\\repos\\TSiustis\\RawCritic-Aggregator\\RawCritic2\\RawCritic2.RazorPages.csproj",
+      "projectName": "RawCritic2.RazorPages",
+      "projectPath": "C:\\Users\\siust\\source\\repos\\TSiustis\\RawCritic-Aggregator\\RawCritic2\\RawCritic2.RazorPages.csproj",
       "packagesPath": "C:\\Users\\siust\\.nuget\\packages\\",
       "outputPath": "C:\\Users\\siust\\source\\repos\\TSiustis\\RawCritic-Aggregator\\RawCritic2\\obj\\",
       "projectStyle": "PackageReference",
