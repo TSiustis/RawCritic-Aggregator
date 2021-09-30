@@ -1,0 +1,206 @@
+﻿@page "{currentpage:int?}"
+@model RawCritic.Web.Pages.Games.PCModel
+
+@{
+    ViewData["Title"] = "PC Games";
+}
+
+
+@if (User.Identity.IsAuthenticated)
+{
+    <p>
+        <a asp-page="Create">Create New</a>
+    </p>
+}
+
+
+
+<div class="container">
+
+    <div class="col-md-9 ">
+        <table class="table" style="table-layout:auto">
+            <thead>
+                <tr>
+
+                    @*<th>
+                            @Html.DisplayNameFor(model => model.Game[0].Title)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Game[0].ReleaseDate)
+                        </th>
+                        <th>
+                            Rating
+                        </th>
+                        <th>
+
+                        @*</th>*@
+
+
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+
+                @foreach (var item in Model.Data)
+                {
+                    string ratingImage = "";
+
+                    string ratingClass = "";
+                    string ratingClassSmall = "";
+                    string ratingColor = "";
+
+                    if (item.AggregatedRating >= 80)
+                    {
+                        ratingClass = "high";
+                        ratingClassSmall = "high-small";
+                        ratingColor = "#03fc56";
+                        ratingImage = "https://storage.cloud.google.com/rawcritic.appspot.com/high.png";
+                    }
+                    else if (item.AggregatedRating < 80 && item.AggregatedRating >= 50)
+                    {
+                        ratingClass = "med";
+                        ratingClassSmall = "med-small";
+                        ratingColor = "#dbfc03";
+                        ratingImage = "https://storage.cloud.google.com/rawcritic.appspot.com/high.png";
+                    }
+                    else if (item.AggregatedRating < 50)
+                    {
+                        ratingClass = "low";
+                        ratingClassSmall = "low-small";
+                        ratingColor = "#d9042b";
+                        ratingImage = "https://storage.cloud.google.com/rawcritic.appspot.com/high.png";
+                    }
+
+                    var rating = item.AggregatedRating.ToString("N0");
+                    var ratingSide = item.AggregatedRating.ToString("N0");
+                    <tr>
+
+
+                        <td>
+
+                            @if (item.AggregatedRating != 0)
+                            {
+                                <span class="@ratingClass">
+
+
+                                    @rating
+
+                                </span>
+                            }
+                            else
+                            {
+                                @:?
+                            }
+
+                            <img src="@item.Cover" height=" 50" style="border-radius: 60%" />
+
+
+                            <a asp-page="./Details" asp-route-id="@item.GameID">  @Html.DisplayFor(modelItem => item.Title)</a>
+                        </td>
+                        @*<th>
+                                @{ string platforms = Model.GetPlatforms(item.platforms);}
+                                @Html.Raw(System.Web.HttpUtility.HtmlEncode(platforms))
+                            </th>*@
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <td>
+                                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+
+                                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                            </td>
+                        }
+                        <td>
+                            @{var date = item.ReleaseDate.ToString("D");
+                                @Html.DisplayFor(modelItem => date);
+                            }
+                        </td>
+
+                    </tr>
+                                }
+        </table>
+    </div>
+
+    <div class="col-md-3">
+        <div class="sidebar-nav pull-right">
+            <div class="well">
+                <h2>Available now</h2>
+                @foreach (var item in Model.GetGames(5))
+
+                {
+                    var ratingSide = item.AggregatedRating.ToString("N0");
+                    string ratingClass = "";
+                    if (item.AggregatedRating >= 80)
+                    {
+                        ratingClass = "high";
+
+                    }
+                    else if (item.AggregatedRating < 80 && item.AggregatedRating >= 50)
+                    {
+                        ratingClass = "med";
+
+
+                    }
+                    else if (item.AggregatedRating < 50)
+                    {
+                        ratingClass = "low";
+
+                    }
+                    var rating = item.AggregatedRating.ToString("N0");
+                    <ul class="nav">
+                        <a asp-page="./Details" asp-route-id="@item.GameID">
+                            <li>
+                                @if (item.AggregatedRating != 0 || item.AggregatedRating != null)
+                                {
+                                    <h4>
+                                        @ratingSide
+                                    </h4>
+
+
+                                }
+                                else
+                                {
+                                    @:?
+                                } @Html.DisplayFor(modelItem => item.Title)
+                                <img src="@item.Cover" height=" 50" style="border-radius: 60%" />
+                            </li>
+                        </a>
+
+
+                        <li>
+                            @Html.DisplayFor(modelItem => item.Platform)
+                        </li>
+                        <li>
+                            @Html.DisplayFor(modelItem => item.Developer)
+                        </li>
+                    </ul>
+                }
+            </div>
+
+
+
+        </div>
+    </div>
+
+</div>
+@{ if (Model.SearchString == null)
+    {
+        <div>
+            <ul class="pagination">
+                <li class="page-item @(!Model.ShowFirst ? "disabled" : "")">
+                    <a asp-page="./PC" asp-route-CurrentPage="1" class="page-link"><i class="fa fa-fast-backward"></i></a>
+                </li>
+
+                <li class="page-item @(!Model.ShowPrevious ? "disabled" : "")">
+                    <a asp-page="./PC" asp-route-CurrentPage="@(Model.CurrentPage - 1)" class="page-link"><i class="fa fa-step-backward"></i></a>
+                </li>
+                <li class="page-item  @(!Model.ShowNext ? "disabled" : "")">
+                    <a asp-page="./PC" asp-route-currentpage="@(Model.CurrentPage + 1)" class="page-link"><i class="fa fa-step-forward"></i></a>
+                </li>
+
+                <li class="page-item  @(!Model.ShowLast ? "disabled" : "")">
+                    <a asp-page="./PC" asp-route-CurrentPage="@Model.TotalPages" class="page-link"><i class="fa fa-fast-forward"></i></a>
+                </li>
+            </ul>
+        </div>
+        }
+    }

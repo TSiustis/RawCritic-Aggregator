@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.Extensions.DependencyInjection;
-using RawCritic2.Data;
-using RawCritic2.Models;
+using RawCritic.Web.Data;
+using RawCritic.Web.Models;
 using Xunit;
 
 namespace RawCritic.UnitTests

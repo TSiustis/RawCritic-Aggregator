@@ -1,0 +1,154 @@
+﻿@page
+@model RawCritic.Web.Pages.IndexModel
+@{
+    ViewData["Title"] = "RawCritic";
+}
+
+
+
+    <div id="myCarousel" class="carousel slide" data-ride="carousel" data-interval="6000">
+        <ol class="carousel-indicators">
+            <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+            <li data-target="#myCarousel" data-slide-to="1"></li>
+            <li data-target="#myCarousel" data-slide-to="2"></li>
+        </ol>
+        <div class="carousel-inner" role="listbox">
+
+            <div class="carousel-item item active">
+
+                <!--<a asp-page="./Games/Details" asp-route-id="@@Model.GetGame(577).GameID">
+                    <img src="@@Model.GetGame(577).Cover" class="d-block  img-fluid" />
+                    <div class="carousel-caption d-none d-md-block" role="option">-->
+                        @*<p>
+
+                            @{var releasedate = Model.GetGame(4).ReleaseDate; }
+                            Release Date:  @Html.DisplayFor(m => m.GetGame(4).ReleaseDate)
+
+
+                        </p>*@
+                    <!--</div>
+                </a>-->
+            </div>
+            <div class="carousel-item item">
+
+                <!--<a asp-page="./Games/Details" asp-route-id="@@Model.GetGame(883).GameID">
+                    <img src="@@Model.GetGame(883).BigCover" class="d-block   img-fluid"  />
+                    <div class="carousel-caption d-none d-md-block" role="option">-->
+                        @*<p>
+                            Release Date:  @Html.DisplayFor(m => m.GetGame(5).ReleaseDate)
+
+                        </p>*@
+                    <!--</div>
+                </a>-->
+            </div>
+            <div class="carousel-item item">
+
+                @*<a asp-page="./Games/Details" asp-route-id="@Model.GetGame(868).GameID">
+                    <img src="@Model.GetGame(868).BigCover" class="d-block  img-fluid" />
+                    <div class="carousel-caption d-none d-md-block" role="option">
+                        <p>
+                            Release Date:  @Html.DisplayFor(m => m.GetGame(868).ReleaseDate)
+
+                        </p>
+                    </div>
+                </a>*@
+            </div>
+
+        </div>
+        <a class="carousel-control left carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
+            <span class="fa fa-arrow-left" ></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class=" carousel-control right carousel-control-next" href="#myCarousel" role="button" data-slide="next">
+            <span class="fa fa-arrow-right" ></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
+
+<div class="row">
+    <div class="col-md-3">
+        <h2>Available now</h2>
+       @foreach (var item in Model.GetGames(3))
+        { var rating = item.AggregatedRating.ToString("N0");
+            <ul>
+                <li>
+                    <nobr>
+                        @if (item.AggregatedRating != 0)
+                        {
+                            @rating
+                        }
+                        else
+                        {
+                            @:?
+                        } <a asp-page="Games/Details" asp-route-id="@item.GameID">      @Html.DisplayFor(modelItem => item.Title)</a> <img src="@item.Cover" height=" 50" style="border-radius: 60%" />
+                    </nobr>
+                </li>
+
+                
+                <li>
+                    @Html.DisplayFor(modelItem => item.Platform)
+                </li>
+                <li>
+                    @Html.DisplayFor(modelItem => item.Developer)
+                </li>
+                </ul>
+                }
+        </div>
+    <div class="col-md-3">
+        <h2>Upcoming Releases</h2>
+        @foreach (var item in Model.GetUpcoming(3))
+        {
+              var rating = item.AggregatedRating.ToString("N0");
+            <ul>
+                <li>
+                    <nobr>
+                        @if (item.AggregatedRating != 0)
+                        {
+                            @rating
+                        }
+                        else
+                        {
+                            @:?
+                        }<a asp-page="Games/Details" asp-route-id="@item.GameID">      @Html.DisplayFor(modelItem => item.Title)</a> <img src="@item.Cover" height=" 50" style="border-radius: 60%" />
+                    </nobr>
+                </li>
+               
+                <li>
+                    @Html.DisplayFor(modelItem => item.Platform)
+                </li>
+                <li>
+                    @Html.DisplayFor(modelItem => item.Developer)
+                </li>
+            </ul>
+        }
+        </div>
+    @*<div class="col-md-3">
+        <h2>Reviewed today</h2>
+        @foreach (var item in Model.GetReviewedToday(5))
+        { var rating = item.AggregatedRating.ToString("N0");
+            <ul>
+                <li>
+
+                    <nobr>
+                        @if (item.AggregatedRating != 0)
+                        {
+                        @rating
+                        }
+                        else
+                        {
+                            @:?
+                        }<a asp-page="Games/Details" asp-route-id="@item.GameID">  @Html.DisplayFor(modelItem => item.Title)  </a><img src="@item.Cover" height=" 50" style="border-radius: 60%" />
+                    </nobr>
+                </li>
+               
+                <li>
+                    @Html.DisplayFor(modelItem => item.Platform)
+                </li>
+                <li>
+                    @Html.DisplayFor(modelItem => item.Developer)
+                </li>
+            </ul>
+        }
+    </div>*@
+    
+</div>

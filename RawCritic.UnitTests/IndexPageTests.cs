@@ -1,13 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Caching.Memory;
 using Moq;
-using RawCritic2.Data;
-using RawCritic2.Models;
-using RawCritic2.Pages.Games;
+using RawCritic.Web.Data;
+using RawCritic.Web.Models;
+using RawCritic.Web.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime.Caching;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
@@ -39,7 +38,7 @@ namespace RawCritic.UnitTests
 
             #region assert
             // Assert
-            var actualMessages = Assert.IsAssignableFrom<List<Game>>(pageModel.Data);
+            var actualMessages = Assert.IsAssignableFrom<List<Game>>(pageModel);
             Assert.Equal(
                 expectedMessages.OrderBy(m => m.Id).Select(m => m.Title),
                 actualMessages.OrderBy(m => m.Id).Select(m => m.Title));

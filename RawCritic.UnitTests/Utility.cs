@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
-using RawCritic2.Data;
+using RawCritic.Web.Data;
 using System;
 using System.Collections.Generic;
 using System.Text;

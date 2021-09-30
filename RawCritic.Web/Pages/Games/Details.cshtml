@@ -1,0 +1,133 @@
+﻿@page
+@model RawCritic.Web.Pages.Games.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<section class="games-single-page">
+    <div class="container">
+        @if (Model.Game.BigCover != null)
+        {
+        <div class="game">
+            <img src="@Html.DisplayFor(model => model.Game.BigCover)" class="img-responsive" style="width:100%" alt="">
+        </div>
+        }
+
+        <div class="row">
+            <div class="col-xl-9 col-lg-8 col-md-7 game-
+                 
+                 ">
+                @{
+                    string ratingClass = "";
+
+                    if (@Model.Game.AggregatedRating >= 80)
+                    {
+                        ratingClass = "high";
+                    }
+                    else if (@Model.Game.AggregatedRating < 80 && @Model.Game.AggregatedRating >= 50)
+                    {
+                        ratingClass = "med";
+                    }
+                    else if (@Model.Game.AggregatedRating < 50)
+                    {
+                        ratingClass = "low";
+                    }
+                }
+                <h2 class="title"> @Html.DisplayFor(model => model.Game.Title)</h2>
+                <span class="@ratingClass">
+
+                    @{ var rating = Model.Game.AggregatedRating.ToString("N0"); }
+                   @rating
+                    
+                </span> 
+                <h2>Game Information</h2>
+             
+                <table>
+                    <tr>
+                        <td><h4>Available on:</h4></td>
+                        <td nowrap><h4>Release date:</h4></td>
+                    </tr>
+                    <tr>
+                        @*@foreach (var item2 in Model.GetPlatforms(Model.Game.platforms))
+        {*@
+                         @{ string platforms = Model.GetPlatforms(Model.Game.platforms);}
+                       
+                        <td style="white-space: pre-line;width:100%"> @Html.Raw(System.Web.HttpUtility.HtmlEncode(platforms))</td>
+                        <td nowrap>
+                            @{var date = Model.Game.ReleaseDate.ToString("D");
+                                @Html.DisplayFor(modelItem => date);
+                            }
+                        </td>
+                        @*}*@
+                        <tr> 
+                </table>
+                <h3>Summary</h3>
+                <p>@Html.DisplayFor(model => model.Game.Summary)</p>
+                @if (Model.Game.Storyline != null)
+                {
+                    <h3>Story</h3>
+                    <div id="content" class="expand">@Html.DisplayFor(model => model.Game.Storyline)</div>
+                }
+            </div>
+            <div class="col-xl-3 col-lg-4 col-md-5 sidebar">
+                <div id="stickySidebar">
+
+
+                    <h2>Available now</h2>
+
+                    <ul class="nav">
+                        @foreach (var item in Model.GetGamesHighScore(70))
+                        {
+                            var ratingSide = item.AggregatedRating.ToString("N0");
+                            
+                                
+
+                                if (item.AggregatedRating >= 80)
+                                {
+                                    ratingClass = "high";
+                                }
+                                else if (item.AggregatedRating < 80 && @Model.Game.AggregatedRating >= 50)
+                                {
+                                    ratingClass = "med";
+                                }
+                                else if (item.AggregatedRating < 50)
+                                {
+                                    ratingClass = "low";
+                                }
+                            
+                            <li>
+                                <nobr>
+                                    <a asp-page="./Details" asp-route-id="@item.GameID">
+                                        <span class="@ratingClass">@ratingSide</span> @item.Title
+                                    </a>
+                                    <img src="@item.Cover" height="50px" style="border-radius: 60%" />
+                                </nobr>
+                            </li>
+
+
+                            <li>
+                                @item.Platform
+                            </li>
+                            <li>
+                                @item.Developer
+                            </li>
+                        }
+                    </ul>
+
+                </div>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+@if (User.IsInRole("Admin"))
+{
+    <div>
+        <a asp-page="./Edit" asp-route-id="@Model.Game.GameID">Edit</a> |
+        <a asp-page="./Index">Back to List</a>
+    </div>
+}
